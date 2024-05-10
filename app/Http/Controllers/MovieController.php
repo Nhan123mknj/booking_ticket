@@ -19,7 +19,15 @@ class MovieController extends Controller
             "genres"=>$cate
         ]);
     }
+    public function detailmovie($slug) {
 
+        $detail=$this->movieDetail($slug);
+        $upmovie=$this->getUpcoming();
+        return view('page.detailmovie', [
+            'upmovies'=>$upmovie,
+            "details"=>$detail
+        ]);
+    }
     public function fetchMovies()
 {
     $apiKey = '222607975221da78368a51fde11198c5';
@@ -102,5 +110,14 @@ public function moviesByGenre($slug) {
         'movies' => $movies,
     ]);
 }
+
+public function movieDetail($slug){
+    return Movie::where('slug',$slug)->with('genres')->first();
 }
+private function getUpcoming(){
+    return Movie::where('status','upcoming')->with('genres')->get();
+}
+}
+
+
 

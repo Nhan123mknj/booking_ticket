@@ -136,20 +136,20 @@
                                             <div class="item" >
                                                 <div class="prs_upcom_movie_box_wrapper">
                                                 <div class="prs_upcom_movie_img_box">
-                                                    <img src="{{ $item->banner_url }}" alt="movie_img" />
+                                                    <img src="{{ asset('source/website/images/' . $item->banner_url) }}" alt="movie_img" />
                                                     <div class="prs_upcom_movie_img_overlay"></div>
                                                     <div class="prs_upcom_movie_img_btn_wrapper">
                                                         <ul>
-                                                            <li><a href="#">View Trailer</a>
+                                                            <li><a href="{{ $item->trailer_url }}" class="test-popup-link video-link" title="title">Xem trailer</a>
                                                             </li>
-                                                            <li><a href="#">View Details</a>
+                                                            <li><a href="{{ route('detailMovie',$item->slug) }}">Chi tiết</a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="prs_upcom_movie_content_box">
                                                     <div class="prs_upcom_movie_content_box_inner" style="height: 112px">
-                                                        <h2><a href="#">{{ $item->title }}</a></h2>
+                                                        <h2><a href="{{ route('detailMovie',$item->slug) }}">{{ $item->title }}</a></h2>
                                                         <p> @foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}
                                                             @endforeach
@@ -193,13 +193,13 @@
                                             <div class="item">
                                                 <div class="prs_upcom_movie_box_wrapper">
                                                 <div class="prs_upcom_movie_img_box">
-                                                    <img src="{{ $item->banner_url }}" alt="movie_img" />
+                                                    <img src="{{ asset('source/website/images/' . $item->banner_url) }}" alt="movie_img" />
                                                     <div class="prs_upcom_movie_img_overlay"></div>
                                                     <div class="prs_upcom_movie_img_btn_wrapper">
                                                         <ul>
-                                                            <li><a href="#">View Trailer</a>
+                                                            <li><a href="{{ $item->trailer_url }}" class="test-popup-link video-link" title="title">Xem trailer</a>
                                                             </li>
-                                                            <li><a href="#">View Details</a>
+                                                            <li><a href="{{ route('detailMovie',$item->slug) }}">Chi Tiết</a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -212,9 +212,9 @@
                                                             @endforeach</p>
                                                         @for ($i = 1; $i <= 5; $i++)
                                                             @if ($i <= $item->star)
-                                                                <i class="fa fa-star"></i> <!-- Full star -->
+                                                                <i class="fa fa-star"></i>
                                                             @else
-                                                                <i class="fa fa-star-o"></i> <!-- Empty star -->
+                                                                <i class="fa fa-star-o"></i>
                                                             @endif
                                                         @endfor
                                                     </div>

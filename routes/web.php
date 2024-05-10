@@ -23,18 +23,49 @@ use Illuminate\Support\Facades\Route;
         'as' => 'moviesByGenre', // Make sure this matches the reference in your view
         'uses' => 'App\Http\Controllers\MovieController@moviesByGenre'
     ]);
-
+    Route::get('/detail/{slug}', [
+        'as' => 'detailMovie', // Make sure this matches the reference in your view
+        'uses' => 'App\Http\Controllers\MovieController@detailmovie'
+    ]);
 
 
 Route::group(['prefix' => 'admin'], function () {
     Route::get('',[
         'as'=>'',
-        'uses'=>'App\Http\Controllers\AdminController@getIndex'
+        'uses'=>'App\Http\Controllers\Admin\AdminController@getIndex'
     ]);
     Route::get('/index',[
         'as'=>'admin',
-        'uses'=>'App\Http\Controllers\AdminController@getHome'
+        'uses'=>'App\Http\Controllers\Admin\AdminController@getHome'
     ]);
+
+    //quan ly phim
+    Route::get('/movie',[
+        'as'=>'movie-admin',
+        'uses'=>'App\Http\Controllers\Admin\MovieController@index'
+    ]);
+    Route::get('/add-movie',[
+        'as'=>'add-movie-admin',
+        'uses'=>'App\Http\Controllers\Admin\MovieController@create'
+    ]);
+    Route::post('/add-movie',[
+        'as'=>'add-movie-admin1',
+        'uses'=>'App\Http\Controllers\Admin\MovieController@store'
+    ]);
+    Route::get('/edit/{id}',[
+        'as'=>'edit-movie-admin',
+        'uses'=>'App\Http\Controllers\Admin\MovieController@edit'
+    ]);
+    Route::post('/update/{id}',[
+        'as'=>'update-movie-admin',
+        'uses'=>'App\Http\Controllers\Admin\MovieController@update'
+    ]);
+    Route::get('/delete-movie/{id}',[
+        'as'=>'delete-movie-admin',
+        'uses'=>'App\Http\Controllers\Admin\MovieController@destroy'
+    ]);
+    //quan ly the loai
+
 });
 Route::get('/fetch-movies',[
     'as'=>'a',

@@ -95,7 +95,7 @@
                                         <div class="col-lg-4 col-md-4 col-sm-6 col-xs-6 prs_upcom_slide_first">
                                             <div class="prs_upcom_movie_box_wrapper prs_mcc_movie_box_wrapper">
                                                 <div class="prs_upcom_movie_img_box">
-                                                    <img src="{{ $item->banner_url }}" alt="movie_img" />
+                                                    <img src="{{ asset('source/website/images/' . $item->banner_url) }}" alt="movie_img" />
                                                     <div class="prs_upcom_movie_img_overlay"></div>
                                                     <div class="prs_upcom_movie_img_btn_wrapper">
                                                         <ul>
@@ -103,14 +103,14 @@
                                                                 Xem Trailer
                                                             </a>
                                                             </li>
-                                                            <li><a href="#">View Details</a>
+                                                            <li><a href="{{ route('detailMovie',$item->slug) }}">Chi tiết</a>
                                                             </li>
                                                         </ul>
                                                     </div>
                                                 </div>
                                                 <div class="prs_upcom_movie_content_box">
                                                     <div class="prs_upcom_movie_content_box_inner"style="height: 112px">
-                                                        <h2><a href="#">{{ $item->title }}</a></h2>
+                                                        <h2><a href="{{ route('detailMovie',$item->slug) }}">{{ $item->title }}</a></h2>
                                                         <p>@foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}
                                                             @endforeach
@@ -160,7 +160,7 @@
                                             <div class="prs_mcc_list_movie_main_wrapper">
                                                 <div class="prs_mcc_outer_wrapper">
                                                 <div class="prs_mcc_list_movie_img_wrapper">
-                                                    <img src="{{ $item->banner_url }}" alt="categoty_img" style="height: 360px">
+                                                    <img src="{{ asset('source/website/images/' . $item->banner_url) }}" alt="categoty_img" style="height: 360px">
                                                 </div>
                                                 <div class="prs_mcc_list_movie_img_cont_wrapper">
                                                     <div class="prs_mcc_list_left_cont_wrapper">
@@ -180,7 +180,7 @@
                                                                 Xem Trailer
                                                             </a>
                                                             </li>
-                                                            <li><a href="#">Chi tiết</a>
+                                                            <li><a href="{{ route('detailMovie',$item->slug) }}">Chi tiết</a>
                                                             </li>
                                                         </ul>
                                                     </div>

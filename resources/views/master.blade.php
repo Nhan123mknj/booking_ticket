@@ -26,6 +26,7 @@
 	<link rel="stylesheet" type="text/css" href="source/website/css/nice-select.css" />
 	<link rel="stylesheet" type="text/css" href="source/website/css/magnific-popup.css" />
 	<link rel="stylesheet" type="text/css" href="source/website/css/venobox.css" />
+    <link rel="stylesheet" type="text/css" href="source/website/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="source/website/css/style4.css" />
 	<link rel="stylesheet" type="text/css" href="source/website/css/responsive4.css" />
 	<link rel="stylesheet" id="theme-color" type="text/css" href="#"/>
@@ -61,7 +62,7 @@
 			</div>
 			<div class="prs_navi_left_main_wrapper">
 				<div class="prs_logo_main_wrapper">
-					<a href="index.html">
+					<a href="{{ route('trang-chu') }}">
 						<img src="source/website/images/header/logo.png" alt="logo" />
 					</a>
 				</div>
