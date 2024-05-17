@@ -9,6 +9,7 @@ class Seat extends Model
 {
     use HasFactory;
     protected $table = "seats";
+    public $timestamps = false;
     public function bookings()
     {
         return $this->hasMany(Booking::class);

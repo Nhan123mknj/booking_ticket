@@ -15,7 +15,7 @@
                         <h4>@foreach ($details->genres as $genre)
                             {{ $loop->first ? '' : ' | ' }}<span>{{ $genre->name }}</span>
                         @endforeach</h4>
-                        <h5><span>2d</span> <span>3d</span> <span>D 4DX</span> <span>Imax 3D</span></h5>
+
                     </div>
                     <div class="st_video_slide_social float_left">
                     <div class="st_slider_rating_btn_heart st_slider_rating_btn_heart_5th">
@@ -133,7 +133,7 @@
         <div class="st_slider_rating_right">
             <div class="st_slider_rating_btn prs_animate_btn1">
                 <ul>
-                    <li data-animation="animated fadeInUp"><a href="#" class="button button--tamaya prs_upcom_main_btn" data-text="book now"><span>book now</span></a>
+                    <li data-animation="animated fadeInUp"><a href="{{ route('showtimeByMovie',$details->slug) }}" class="button button--tamaya prs_upcom_main_btn" data-text="book now"><span>book now</span></a>
                                     </li>
                 </ul>
             </div>
@@ -338,7 +338,7 @@
                             </div>
                             <div class="prs_upcom_movie_content_box_inner_icon">
                                 <ul>
-                                    <li><a href="movie_booking.html"><i class="flaticon-cart-of-ecommerce"></i></a>
+                                    <li><a href="{{ route('showtimeByMovie',$item->slug) }}"><i class="flaticon-cart-of-ecommerce"></i></a>
                                     </li>
                                 </ul>
                             </div>

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Movie;
-
+use App\Models\Showtime;
+use App\Models\Seat;
+use App\Models\Booking;
 class PageController extends Controller
 {
     public function home() {
@@ -47,4 +49,16 @@ class PageController extends Controller
     private function getNowPlaying(){
         return Movie::where('status','nowshowing')->with('genres')->get();
     }
+
+    public function error() {
+        return view('error-404');
+    }
+    public function confirmBooking( $bookingId)
+    {
+        $booking = Booking::with('seat', 'showtime', 'user')->findOrFail($bookingId);
+        $totalPrice = $booking->seat->price;
+
+        return view('page.success', compact('booking', 'totalPrice'));
+    }
+
 }

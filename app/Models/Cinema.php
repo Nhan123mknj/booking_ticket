@@ -11,7 +11,7 @@ class Cinema extends Model
     protected $table = "cinemas";
     public function showtimes()
     {
-        return $this->hasMany(Showtime::class);
+        return $this->hasMany(Showtime::class, 'cinema_id');
     }
 
     public function seats()

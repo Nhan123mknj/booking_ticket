@@ -21,6 +21,6 @@ class Showtime extends Model
 
     public function theater()
     {
-        return $this->belongsTo(Cinema::class);
+        return $this->belongsTo(Cinema::class, 'cinema_id');
     }
 }

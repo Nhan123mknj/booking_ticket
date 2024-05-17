@@ -7,7 +7,7 @@
 ">
       <div class="card mb-4">
         <div class="card-header d-flex justify-content-between align-items-center">
-          <h5 class="mb-0">Thêm phim</h5>
+          <h5 class="mb-0">Cập nhật phim</h5>
           <small class="text-muted float-end">Default label</small>
         </div>
         <div class="card-body">
@@ -65,7 +65,7 @@
                         <img src="{{ asset('source/website/images/' . $movie->banner_doc) }}" alt="Current Banner" style="width: 150px; height: auto;">
                     </div>
                 @endif
-                <input type="file" class="form-control" id="basic-default" name="banner_url" />
+                <input type="file" class="form-control" id="basic-default" name="banner_doc" />
                 <div class="form-text">Leave blank if you do not wish to change the banner.</div>
             </div>
               <div class="mb-3">

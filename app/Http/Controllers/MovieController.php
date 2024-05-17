@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Genres;
 use App\Models\Movie;
+use App\Models\Showtime;
 use FFI\CData;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
@@ -26,6 +27,14 @@ class MovieController extends Controller
         return view('page.detailmovie', [
             'upmovies'=>$upmovie,
             "details"=>$detail
+        ]);
+    }
+    public function bookingMovie($slug){
+        $booking=$this->bookMovie($slug);
+        $cate=$this->getCate();
+        return view('page.booking', [
+            "genres"=>$cate,
+            'bookings'=>$booking,
         ]);
     }
     public function fetchMovies()
@@ -96,8 +105,8 @@ public function getCate() {
     return Genres::with('movies')->get();
 }
 
-public function moviesByGenre($slug) {
-    $genre = Genres::with('movies')->withCount('movies')->where('id',$slug)->first();
+public function moviesByGenre($id) {
+    $genre = Genres::with('movies')->withCount('movies')->where('id',$id)->first();
     $movies = Movie::with('genres')
     ->where('Is_Active', 1)
     ->whereHas('genres', function ($query) use ($genre) {
@@ -114,9 +123,18 @@ public function moviesByGenre($slug) {
 public function movieDetail($slug){
     return Movie::where('slug',$slug)->with('genres')->first();
 }
+
+public function bookmovie($slug){
+    return Movie::where('slug',$slug)->with('genres')->first();
+}
+public function seat($slug){
+    return Movie::where('slug',$slug)->with('genres')->first();
+}
 private function getUpcoming(){
     return Movie::where('status','upcoming')->with('genres')->get();
 }
+
+
 }
 
 

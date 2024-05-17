@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="prs_animate_btn1 prs_upcom_main_wrapper prs_third_slider_btn">
                                     <ul>
-                                        <li data-animation="animated fadeInUp"><a href="movie_booking.html" class="button button--tamaya prs_upcom_main_btn" data-text="book now"><span>book now</span></a>
+                                        <li data-animation="animated fadeInUp"><a href="{{ route('showtimeByMovie',$item->slug) }}" class="button button--tamaya prs_upcom_main_btn" data-text="book now"><span>book now</span></a>
                                     </li>
                                     </ul>
                                 </div>
@@ -164,7 +164,7 @@
                                                     </div>
                                                     <div class="prs_upcom_movie_content_box_inner_icon">
                                                         <ul>
-                                                            <li><a href="movie_booking.html"><i class="flaticon-cart-of-ecommerce"></i></a>
+                                                            <li><a href="{{ route('showtimeByMovie',$item->slug) }}"><i class="flaticon-cart-of-ecommerce"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
@@ -220,7 +220,7 @@
                                                     </div>
                                                     <div class="prs_upcom_movie_content_box_inner_icon">
                                                         <ul>
-                                                            <li><a href="movie_booking.html"><i class="flaticon-cart-of-ecommerce"></i></a>
+                                                            <li><a href="{{ route('showtimeByMovie',$item->slug) }}"><i class="flaticon-cart-of-ecommerce"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>

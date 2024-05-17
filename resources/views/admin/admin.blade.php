@@ -41,7 +41,7 @@
     <link rel="stylesheet" href="source/admin/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css" />
 
     <link rel="stylesheet" href="source/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
-
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <!-- Page CSS -->
 
     <!-- Helpers -->
@@ -50,7 +50,21 @@
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="source/admin/assets/js/config.js"></script>
-  </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    @livewireStyles
+    <style>
+        .avatar{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+"
+        }
+    </style>
+</head>
 
   <body>
     <!-- Layout wrapper -->
@@ -134,11 +148,28 @@
                     <div data-i18n="Analytics">Dashboard</div>
                 </a>
             </li>
-            <!-- Movie Management -->
             <li class="menu-item {{ request()->routeIs('movie-admin') ? 'active' : '' }}">
                 <a href="{{ route('movie-admin') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-film"></i> <!-- Changed icon to better represent movies -->
+                    <i class="menu-icon tf-icons bx bx-film"></i>
                     <div data-i18n="Analytics">Quản lý Phim</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('user-admin') ? 'active' : '' }}">
+                <a href="{{ route('user-admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-user"></i>
+                    <div data-i18n="Analytics">Quản lý Người dùng</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('blog-admin') ? 'active' : '' }}">
+                <a href="{{ route('blog-admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-news"></i>
+                    <div data-i18n="Analytics">Quản lý Bài viết</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('genres-admin') ? 'active' : '' }}">
+                <a href="{{ route('genres-admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-news"></i>
+                    <div data-i18n="Analytics">Quản lý Thể loại</div>
                 </a>
             </li>
         </ul>
@@ -192,7 +223,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="source/admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="source/website/images/user_avatar/{{ Auth::user()->images }}" alt class="w-px-40 h-auto rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -201,12 +232,12 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="source/admin/assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="source/website/images/user_avatar/{{ Auth::user()->images }}" alt class="w-px-40 h-auto rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">
-                            <span class="fw-semibold d-block">John Doe</span>
-                            <small class="text-muted">Admin</small>
+                            <span class="fw-semibold d-block">{{ Auth::user()->name}}</span>
+                            <small class="text-muted">{{ Auth::user()->role ? 'Admin' : 'User'}}</small>
                           </div>
                         </div>
                       </a>
@@ -239,7 +270,7 @@
                       <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                      <a class="dropdown-item" href="auth-login-basic.html">
+                      <a class="dropdown-item" href="{{ route('logout') }}">
                         <i class="bx bx-power-off me-2"></i>
                         <span class="align-middle">Log Out</span>
                       </a>
@@ -320,6 +351,9 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
+
     @yield('custom-js');
+
   </body>
+
 </html>

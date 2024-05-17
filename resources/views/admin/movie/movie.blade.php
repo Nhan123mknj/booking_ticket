@@ -69,7 +69,6 @@
 
             </tbody>
           </table>
-
         </div>
         {{ $movies->links('vendor.pagination.admin') }}
       </div>

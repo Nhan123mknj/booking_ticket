@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                 <div class="prs_title_heading_wrapper">
-                    <h2>contact us</h2>
+                    <h2>Liên hệ</h2>
                     <ul>
                         <li><a href="{{ route('trang-chu') }}">Trang chủ</a>
                         </li>
@@ -30,15 +30,16 @@
                     <h2>Liên hệ đến chúng tôi</h2>
                 </div>
                 <div class="row">
-                    <form>
+                    <form method="POST" action="{{ route('lien-he1') }}" enctype="multipart/form-data">
+                        @csrf
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="prs_contact_input_wrapper">
-                                <input name="full_name" type="text" class="require" placeholder="Name">
+                                <input name="name" type="text" class="require" placeholder="Name">
                             </div>
                         </div>
                         <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                             <div class="prs_contact_input_wrapper">
-                                <input type="email" class="require" data-valid="email" data-error="Email should be valid." placeholder="Email">
+                                <input name="email"type="email" class="require" data-valid="email" data-error="Email should be valid." placeholder="Email">
                             </div>
                         </div>
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -52,7 +53,7 @@
                                 <ul>
                                     <li>
                                         <input type="hidden" name="form_type" value="contact" />
-                                        <button type="button" class="submitForm">Submit</button>
+                                        <button type="submit" class="submitForm">Gửi</button>
                                     </li>
                                 </ul>
                             </div>
@@ -79,13 +80,11 @@
         </div>
     </div>
 </div>
-<!-- prs contact form wrapper End -->
-<!-- prs contact map Start -->
+
 <div class="hs_contact_map_main_wrapper">
     <div id="map"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3780.1103481701125!2d105.6931747752952!3d18.659043582461663!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3139cddf0bf20f23%3A0x86154b56a284fa6d!2zVHLGsOG7nW5nIMSQ4bqhaSBo4buNYyBWaW5o!5e0!3m2!1svi!2s!4v1700483833612!5m2!1svi!2s" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>
 </div>
-<!-- prs contact map End -->
-<!-- prs contact info Start -->
+
 <div class="prs_contact_info_main_wrapper">
     <div class="container">
         <div class="row">

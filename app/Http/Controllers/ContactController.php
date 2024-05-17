@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Movie;
+use App\Models\Contact;
 class ContactController extends Controller
 {
     public function contact() {
-        $contact = $this->GetContact();
-        return view('page.contact', [
-            'contacts'=>$contact,
-        ]);
+        return view('page.contact');
     }
-    private function GetContact() {
-        return [
-            'title' => 'Welcome to Our Movie Site',
-            'content' => 'Enjoy our curated list of movies and shows.'
-        ];
+    public function sendcontact(Request $request){
+
+        $contact = new Contact();
+        $contact->name = $request->input('name');
+        $contact->email = $request->input('email');
+        $contact->message = $request->message;
+        $contact->save();
+        return redirect()->back()->with('success', 'Gui  thanh cong');
     }
 }

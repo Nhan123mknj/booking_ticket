@@ -61,10 +61,11 @@
                         <h2>Thể loại</h2>
                         <ul>
                             @foreach ($genres as $item)
-                            <li><i class="fa fa-caret-right"></i> &nbsp;&nbsp;&nbsp;
-                                <a href="{{ route('moviesByGenre', ['slug' => $item->id]) }}">{{ $item->name }} <span>{{ $item->movies_count }}</span></a>
-
-                            </li>
+                                @if ($item->movies_count > 0)
+                                    <li><i class="fa fa-caret-right"></i> &nbsp;&nbsp;&nbsp;
+                                        <a href="{{ route('moviesByGenre', ['id' => $item->id]) }}">{{ $item->name }} <span>{{ $item->movies_count }}</span></a>
+                                    </li>
+                                @endif
                             @endforeach
 
 
@@ -123,7 +124,7 @@
                                                     </div>
                                                     <div class="prs_upcom_movie_content_box_inner_icon">
                                                         <ul>
-                                                            <li><a href="movie_booking.html"><i class="flaticon-cart-of-ecommerce"></i></a>
+                                                            <li><a href="{{ route('showtimeByMovie',$item->slug) }}"><i class="flaticon-cart-of-ecommerce"></i></a>
                                                             </li>
                                                         </ul>
                                                     </div>
