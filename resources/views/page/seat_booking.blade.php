@@ -127,12 +127,12 @@ Author: Webstrot
                         <div class="st_seat_lay_row float_left">
                             <ul>
                                 @foreach($showtime->theater->seats as $seat)
-                                    @if ($seat->status == 0)
+                                    @if ($seat->status == 1)
                                     <li class="seat_disable">
                                         <input type="checkbox" id="c{{ $seat->number }}" name="seat[]" value="{{ $seat->id }}" disabled>
                                         <label for="c{{ $seat->number }}"></label>
                                     </li>
-                                    @elseif($seat->status == 1)
+                                    @elseif($seat->status == 0)
                                     <li>
                                         <span>Pay Rs.790.00</span>
                                         <input type="checkbox" id="c{{ $seat->number }}" name="seat[]" value="{{ $seat->id }}">

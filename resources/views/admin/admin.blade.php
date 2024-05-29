@@ -51,6 +51,7 @@
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="source/admin/assets/js/config.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     @livewireStyles
     <style>
         .avatar{
@@ -67,6 +68,7 @@
 </head>
 
   <body>
+    @include('sweetalert::alert')
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
       <div class="layout-container">
@@ -168,8 +170,32 @@
             </li>
             <li class="menu-item {{ request()->routeIs('genres-admin') ? 'active' : '' }}">
                 <a href="{{ route('genres-admin') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-news"></i>
+                    <i class="menu-icon tf-icons bx bx-category"></i>
                     <div data-i18n="Analytics">Quản lý Thể loại</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('seat-admin') ? 'active' : '' }}">
+                <a href="{{ route('seat-admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-chair"></i>
+                    <div data-i18n="Analytics">Quản lý Ghế</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('contact-admin') ? 'active' : '' }}">
+                <a href="{{ route('contact-admin') }}" class="menu-link">
+                    <i class='menu-icon tf-icons bx bxs-contact'></i>
+                    <div data-i18n="Analytics">Quản lý Liên hệ</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('cinema-admin') ? 'active' : '' }}">
+                <a href="{{ route('cinema-admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bxs-camera-movie"></i>
+                    <div data-i18n="Analytics">Quản lý rạp</div>
+                </a>
+            </li>
+            <li class="menu-item {{ request()->routeIs('slide-admin') ? 'active' : '' }}">
+                <a href="{{ route('slide-admin') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-slideshow"></i>
+                    <div data-i18n="Analytics">Quản lý Slide</div>
                 </a>
             </li>
         </ul>

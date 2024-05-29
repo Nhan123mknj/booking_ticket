@@ -25,7 +25,7 @@
                 <th>Mô tả</th>
                 <th>Ảnh</th>
                 <th>Tác giả</th>
-                {{-- <th>Nội dung</th> --}}
+                <th>Số comment</th>
                 <th>Trạng thái</th>
                 <th>Kích hoạt</th>
                 <th>Chức năng</th>
@@ -52,7 +52,7 @@
                       <td><img style = "width: 100px;
                         height: auto;"src="{{ asset('source/website/images/blog/' . $item->images) }}" alt="movie_img" /></td>
                       <td>{{ $item->author }}</td>
-                      {{-- <td>{{ Str::limit($item->contents, 10) }}</td> --}}
+                      <td>{{ $item->comments->count() }}</td>
                       <td>
                           @if ($item->is_active == 1)
                               <span class="badge bg-label-success">Đã kích hoạt</span>
@@ -61,7 +61,6 @@
                           @endif
                       </td>
                       <td>
-
                           <a href="{{ route('toggle.active',$item->id) }}" class="btn btn-{{ $item->is_active ? 'danger' : 'success' }}" >
                               {{ $item->is_active ? 'Không kích hoạt' : 'Kích hoạt' }}
                           </a>
@@ -72,7 +71,10 @@
                             <i class="bx bx-dots-vertical-rounded"></i>
                           </button>
                           <div class="dropdown-menu">
-                              <a class="dropdown-item" href="{{ route('edit-blog-admin',$item->id) }}">
+                            <a class="dropdown-item" href="{{ route('show-detail-blog',$item->id) }}">
+                                <i class="bx bx-show"></i> Show
+                            </a>
+                              <a class="dropdown-item" href="{{ route('edit-blog-admin',$item->link) }}">
                                   <i class="bx bx-edit-alt me-1"></i> Edit
                               </a>
                             <a class="dropdown-item" href="{{ route('delete-blog-admin',$item->id) }}"

@@ -1,3 +1,5 @@
+
+
 @extends('admin.admin')
 @section('content_Admin')
 
@@ -18,50 +20,49 @@
             <thead>
               <tr>
                 <th>STT</th>
-                <th>Thể loại</th>
-                <th>Chi tiết</th>
+                <th>Tên thể loại</th>
+                <th>Mô tả</th>
                 <th>Chức năng</th>
+              </tr>
               </tr>
             </thead>
             <tbody class="table-border-bottom-0">
                 @php
-                    $perPage = $genres->perPage();
-                    $currentPage = $genres->currentPage();
+                    $perPage = $danhmuc->perPage();
+                    $currentPage = $danhmuc->currentPage();
                     $i = ($currentPage - 1) * $perPage + 1;
                 @endphp
-                @foreach ($genres as $item)
+                @foreach ($danhmuc as $item)
 
                 <tr>
                     <td>
 
-                      <span class="fw-smail">{{ $i++ }}</span>
-                    </td>
-                    <td>{{ $item->name }}</td>
-
-                    <td><span class="badge bg-label-primary me-1">{{ $item->description }}</span></td>
-                    <td>
-                      <div class="dropdown">
-                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
-                          <i class="bx bx-dots-vertical-rounded"></i>
-                        </button>
-                        <div class="dropdown-menu">
-                            <a class="dropdown-item" href="{{ route('edit-genres-admin', ['id' => $item->id]) }}">
-                                <i class="bx bx-edit-alt me-1"></i> Edit
-                            </a>
-                          <a class="dropdown-item" href="{{ route('delete-genres-admin',['id'=>$item->id]) }}"
-                            ><i class="bx bx-trash me-1"></i> Delete</a
-                          >
+                        <span class="fw-smail">{{ $i++ }}</span>
+                      </td>
+                      <td>{{ $item->name }}</td>
+                      <td>{{ Str::limit($item->description, 50) }}</td>
+                      <td>
+                        <div class="dropdown">
+                          <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                          </button>
+                          <div class="dropdown-menu">
+                              <a class="dropdown-item" href="{{ route('edit-genres-admin', ['slug' => $item->slug]) }}">
+                                  <i class="bx bx-edit-alt me-1"></i> Edit
+                              </a>
+                            <a class="dropdown-item" href="{{ route('delete-genres',['id'=>$item->id]) }}"
+                              ><i class="bx bx-trash me-1"></i> Delete</a
+                            >
+                          </div>
                         </div>
-                      </div>
-                    </td>
+                      </td>
                   </tr>
                 @endforeach
 
             </tbody>
           </table>
-
         </div>
-        {{ $genres->links('vendor.pagination.admin') }}
+        {{ $danhmuc->links('vendor.pagination.admin') }}
       </div>
       <!--/ Basic Bootstrap Table -->
 

@@ -19,32 +19,7 @@
 </div>
 <!-- prs title wrapper End -->
 <!-- prs mc slider wrapper Start -->
-<div class="prs_mc_slider_main_wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="prs_heading_section_wrapper">
-                    <h2>Comming soon</h2>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="prs_mc_slider_wrapper">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item">
-                            <img src="source/website/images/content/movie_category/slider_img1.jpg" alt="about_img">
-                        </div>
-                        <div class="item">
-                            <img src="source/website/images/content/movie_category/slider_img2.jpg" alt="about_img">
-                        </div>
-                        <div class="item">
-                            <img src="source/website/images/content/movie_category/slider_img3.jpg" alt="about_img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('page.slide.slide');
 <!-- prs mc slider wrapper End -->
 <!-- prs mc category slidebar Start -->
 <div class="prs_mc_category_sidebar_main_wrapper">
@@ -53,9 +28,12 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 hidden-sm hidden-xs">
                 <div class="prs_mcc_left_side_wrapper">
                     <div class="prs_mcc_left_searchbar_wrapper">
-                        <input type="text" placeholder="Search Movie">
-                        <button><i class="flaticon-tool"></i>
+                        <form action="{{ route('searchMovie') }}" method="get">
+
+                        <input type="text" placeholder="Tìm kiếm phim" name="keyword_submit">
+                        <button type="submit" name="search_movie"><i class="flaticon-tool"></i>
                         </button>
+                    </form>
                     </div>
                     <div class="prs_mcc_bro_title_wrapper">
                         <h2>Thể loại</h2>
@@ -116,11 +94,13 @@
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}
                                                             @endforeach
                                                         </p>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star"></i>
-                                                        <i class="fa fa-star-o"></i>
-                                                        <i class="fa fa-star-o"></i>
+                                                        @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $item->Star)
+                                                                <i class="fa fa-star"></i>
+                                                            @else
+                                                                <i class="fa fa-star-e"></i>
+                                                            @endif
+                                                        @endfor
                                                     </div>
                                                     <div class="prs_upcom_movie_content_box_inner_icon">
                                                         <ul>
@@ -148,16 +128,24 @@
                                             <div class="prs_mcc_list_movie_main_wrapper">
                                                 <div class="prs_mcc_outer_wrapper">
                                                 <div class="prs_mcc_list_movie_img_wrapper">
-                                                    <img src="{{ $item->banner_url }}" alt="categoty_img" style="height: 360px">
+                                                    <img src="{{ asset('source/website/images/' . $item->banner_url) }}" alt="categoty_img" style="height: 360px">
                                                 </div>
                                                 <div class="prs_mcc_list_movie_img_cont_wrapper">
                                                     <div class="prs_mcc_list_left_cont_wrapper">
                                                         <h2>{{ $item->title }}</h2>
                                                         <p>@foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}
-                                                            @endforeach &nbsp;&nbsp;&nbsp;<i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star-o"></i><i class="fa fa-star-o"></i>
+                                                            @endforeach &nbsp;&nbsp;&nbsp;
                                                         </p>
-                                                        <h4>Movie Director - {{ $item->director }}</h4>
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $item->Star)
+                                                                <i class="fa fa-star"></i>
+                                                            @else
+                                                                <i class="fa fa-star-e"></i>
+                                                            @endif
+                                                        @endfor
+
+                                                        <h4>Đạo diễn - {{ $item->director }}</h4>
                                                     </div>
                                                     <div class="prs_mcc_list_right_cont_wrapper">	<a href="#"><i class="flaticon-cart-of-ecommerce"></i></a>
                                                     </div>
@@ -168,7 +156,8 @@
                                                                 Xem Trailer
                                                             </a>
                                                             </li>
-                                                            <li><a href="#">Chi tiết</a>
+                                                            <li><a href="{{ route('detailMovie',$item->slug) }}">Chi tiết</a>
+
                                                             </li>
                                                         </ul>
                                                     </div>

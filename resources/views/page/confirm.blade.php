@@ -102,6 +102,7 @@ Author: Webstrot
 
 								</div>
 							</div>
+
 							<div class="col-md-12">
 								<div class="st_cherity_btn float_left">
 									<h3>CHỌN PHƯƠNG THỨC THANH TOÁN</h3>
@@ -110,11 +111,18 @@ Author: Webstrot
 										</li>
 										<li><a href="#"><i class="flaticon-tickets"></i> &nbsp;Box office Pickup </a>
 										</li>
-										<li><form action="{{ route('book.Datve', $showtime->id) }}" method="POST">
+										<li>
+                                            <form action="{{ route('vnpay',['showtimeId'=> $showtime->id]) }}" method="POST">
                                             @csrf
-                                            <button type="submit" class="btn btn-primary">Thanh toán</button>
+                                            <input type='hidden' name="total" value="{{ $totalPrice }}">
+                                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
                                         </form>
 										</li>
+                                        {{-- <li><form action="{{ route('book.Datve', $showtime->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
+                                        </form>
+										</li> --}}
 									</ul>
 								</div>
 							</div>
@@ -131,7 +139,7 @@ Author: Webstrot
 								<div class="st_dtts_sb_ul float_left">
 									<ul>
 										<li>{{ $seatDisplay }}
-											<br>({{ count($seatNumbers) }} Vé)  <span> {{ $Price }} đồng</span>
+											<br>({{ count($seatNumbers) }} Vé)  <span> {{number_format($Price) }} nghìn đồng</span>
 										</li>
 										<li>Phí xử lí internet <span>100 đồng</span>
 										</li>
@@ -142,9 +150,9 @@ Author: Webstrot
 									</p>
 								</div>
 								<div class="st_dtts_sb_h2 float_left">
-									<h3>Tổng tiền <span>{{ $totalPrice }} đồng</span></h3>
+									<h3>Tổng tiền <span>{{ number_format($totalPrice) }} nghìn đồng</span></h3>
 
-									<h5>Số tiền phải trả <span>{{ $totalPrice }} đồng</span></h5>
+									<h5>Số tiền phải trả <span>{{ number_format($totalPrice) }} nghìn đồng</span></h5>
 								</div>
 							</div>
 						</div>

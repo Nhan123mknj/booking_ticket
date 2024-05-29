@@ -25,36 +25,41 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="st_bcc_heading_wrapper float_left">	<i class="fa fa-check-circle"></i>
-                        <h3>Thanh toán <span>{{ $totalPrice }}</span> Hoàn tất</h3>
+                        <h3>Thanh toán <span>{{ number_format($totalPrice) }} VND</span> Hoàn tất</h3>
                     </div>
                 </div>
                 <div class="col-md-12">
                     <div class="st_bcc_ticket_boxes_wrapper float_left">
                         <div class="st_bcc_tecket_top_hesder float_left">
-                            <p>Thanh toán hoàn tất</p> Booking ID<span> {{ $booking->id }}</span>
+                            <p>Thanh toán hoàn tất</p> Booking ID<span> </span>
                         </div>
                         <div class="st_bcc_tecket_bottom_hesder float_left">
                             <div class="st_bcc_tecket_bottom_left_wrapper">
                                 <div class="st_bcc_tecket_bottom_inner_left">
                                     <div class="st_bcc_teckt_bot_inner_img">
-                                        <img src="images/content/tcc1.png" alt="img">
+                                        <img style="width: 85px;height:127px" src="{{ asset('source/website/images/' . $showtime->movie->banner_url) }}" alt="img">
                                     </div>
+
                                     <div class="st_bcc_teckt_bot_inner_img_cont">
-                                        <h4>{{ $booking->user->name }}</h4>
-                                        <h3>{{ $booking->showtime->Date_show }} | {{ $booking->showtime->Time_show }}</h3>
-                                        <h6>{{ $booking->movie->title}}</h6>
+
+
+                                        {{-- @foreach ($showtime->bookings as $booking) --}}
+                                        {{-- <h4>{{ $showtime->bookings->first()->user->name }}</h4> --}}
+                                        {{-- @endforeach --}}
+                                        <h3>{{ $showtime->Date_show }} | {{ $showtime->Time_show }}</h3>
+                                        <h6>{{ $showtime->movie->title}}</h6>
                                     </div>
                                     <div class="st_purchase_img">
-                                        <img src="images/content/pur2.png" alt="img">
+                                        <img src="source/website/images/content/pur2.png" alt="img">
                                     </div>
                                 </div>
                                 <div class="st_bcc_tecket_bottom_inner_right">	<i class="fas fa-chair"></i>
                                     <h3>2 TICKETS <br>
-<span>EXECUTIV - K1, K2</span></h3>
+                                    <span>EXECUTIV - K1, K2</span></h3>
                                 </div>
                             </div>
                             <div class="st_bcc_tecket_bottom_right_wrapper">
-                                <img src="images/content/qr.png" alt="img">
+                                <img src="source/website/images/content/qr.png" alt="img">
                                 <h4>Booking ID<br>SSST0000310644</h4>
                             </div>
                             <div class="st_bcc_tecket_bottom_left_price_wrapper">

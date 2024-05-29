@@ -14,7 +14,7 @@ class PageController extends Controller
         $bannerMovies = $this->getBannerMovies();
         $slides=$this->getSlide();
         $movieUpcoming=$this->getUpcoming();
-
+        // dd($movieUpcoming->Star);
         $movienow=$this->getNowPlaying();
         return view('page.home', [
             'indexData' => $indexData,

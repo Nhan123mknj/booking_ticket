@@ -35,6 +35,7 @@
     <!-- Thêm CSS của Magnific Popup -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Thêm JavaScript của jQuery và Magnific Popup -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
@@ -79,6 +80,7 @@
 	<script src="source/website/js/smothscroll_part1.js"></script>
 	<script src="source/website/js/smothscroll_part2.js"></script>
 	<script src="source/website/js/custom4.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 	<!--main js file end-->
 </body>
 <script>
@@ -101,12 +103,10 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             const activeTabs = document.querySelectorAll('.active');
 
-            // Xóa class 'active' và 'show' khỏi tất cả các tab và tab-content
             activeTabs.forEach(function(tab) {
                 tab.classList.remove('active', 'show');
             });
 
-            // Thêm class 'active' và 'show' vào tab hiện tại
             tab.classList.add('active');
             const tabPane = document.querySelector(tab.getAttribute('href'));
             tabPane.classList.add('active', 'show');
@@ -114,5 +114,24 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });</script>
 
+@if (Session::has('message'))
+
+<script>
+    toastr.success("{{ Session::get('message') }}")
+</script>
+@endif
+
+@if (Session::has('msg'))
+
+<script>
+    toastr.success("{{ Session::get('msg') }}")
+</script>
+@endif
+@if (Session::has('success'))
+
+<script>
+    toastr.success("{{ Session::get('success') }}")
+</script>
+@endif
 <!-- Mirrored from www.webstrot.com/html/moviepro/html/index4.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 May 2024 05:47:15 GMT -->
 </html>

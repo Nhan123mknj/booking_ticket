@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use Hash;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+// use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
@@ -31,16 +33,32 @@ class UserController extends Controller
      */
     public function postregister(Request $request)
     {
-        $request->merge(['password'=>Hash::make($request->password)]);
+        $customMessages = [
+            'password.min' => 'Mật khẩu phải chứa ít nhất 8 kí tự.',
+            'email.unique' => 'Email này đã được sử dụng. Vui lòng chọn một email khác.'
+        ];
+
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ], $customMessages);
+
+        if ($validator->fails()) {
+            return redirect()->back()
+                             ->withErrors($validator)
+                             ->withInput();
+        }
+
+        $request->merge(['password' => Hash::make($request->password)]);
         User::create($request->all());
+
+        // Alert::success('Đăng ký thành công', 'Hãy đợi tài khoản được kích hoạt.');
         return redirect()->route('dang-nhap');
     }
 
     public function postlogin(Request $request)
     {
-
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password])) {
-
             if (Auth::user()->is_locked == 1) {
                 return back()->withErrors([
                     'email' => 'Tài khoản của bạn đã bị khóa.'
@@ -51,14 +69,13 @@ class UserController extends Controller
                 ])->onlyInput('email');
             } else {
                 $request->session()->regenerate();
-                return redirect()->route('trang-chu');
+                return redirect()->route('trang-chu')->with('message','Đăng nhập thành công');
             }
         } else {
             return back()->withErrors([
                 'email' => 'Email hoặc mật khẩu không chính xác.'
             ])->onlyInput('email');
         }
-
     }
     public function logout(Request $request)
     {
@@ -68,9 +85,77 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->back();
+        return redirect()->back()->with('msg','Bạn đã đăng xuất');
 
     }
+    /**
+     * Display the specified resource.
+     */
+    public function index()
+    {
+        $user = User::paginate(5);
+        return view('admin.user.user', [
+            'user'=>$user
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+
+        $create = User::get();
+        return view('admin.user.create', [
+            'creates'=>$create,
+        ]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        $request->merge(['password'=>Hash::make($request->password)]);
+        $user = new User();
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->password = $request->input('password');
+        if($request->hasFile('images')){
+            $file =$request->file('images');
+            $extension = $file->getClientOriginalExtension();
+            $fileName=time().'.'.$extension;
+            $file->move('source/website/images',$fileName);
+            $user->images =$fileName;
+        }
+        $user->save();
+        return redirect()->route('user-admin')->with('status', 'Them thanh cong');
+    }
+
+    public function toggleLock($id)
+    {
+        $user=User::find($id);
+        if($user->is_locked){
+            $user->is_locked =0;
+        }else{
+            $user->is_locked =1;
+        }
+        $user->save();
+        return back();
+    }
+
+    public function enable_user($id)
+    {
+        $user=User::find($id);
+        if($user->is_actived){
+            $user->is_actived =0;
+        }else{
+            $user->is_actived =1;
+        }
+        $user->update();
+        return back();
+    }
+
     /**
      * Display the specified resource.
      */
@@ -84,7 +169,8 @@ class UserController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.user.update',compact('user'));
     }
 
     /**
@@ -93,6 +179,21 @@ class UserController extends Controller
     public function update(Request $request, string $id)
     {
 
+        $user = User::where('id', $id)->first();
+        $user->name = $request->input('name');
+        $user->password = $request->input('password');
+        $user->role = $request->input('role');
+        $user->phone = $request->input('phone');
+        if($request->hasFile('images')){
+            $file =$request->file('images');
+            $extension = $file->getClientOriginalExtension();
+            $fileName=time().'.'.$extension;
+            $file->move('source/website/images',$fileName);
+            $user->images =$fileName;
+        }
+        $user->update();
+        // dd($request->all());
+        return redirect()->route('user-admin')->with('status', 'Them thanh cong');
     }
 
     /**
@@ -100,6 +201,8 @@ class UserController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user=User::find($id);
+        $user->delete();
+        return redirect()->back()->with('success', 'Xoa thanh cong');
     }
 }

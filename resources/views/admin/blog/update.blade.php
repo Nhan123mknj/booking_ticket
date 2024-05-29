@@ -11,7 +11,7 @@
           <small class="text-muted float-end">Default label</small>
         </div>
         <div class="card-body">
-        <form method="POST" action="{{ route('update-blog-admin',['id'=>$blog->id]) }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('update-blog-admin',['link'=>$blog->link]) }}" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
               <label class="form-label" for="basic-default-fullname">Title</label>
@@ -65,43 +65,18 @@
 @endsection
 @section('custom-js')
 
-<script src="https://cdn.ckeditor.com/ckeditor5/41.4.1/classic/ckeditor.js"></script>
+<script src="{{asset('source\admin\assets\ckeditor5-build-classic\ckeditor.js')}}"></script>
 
 <script>
     ClassicEditor
         .create( document.querySelector( '#editor' ),
         {
-            plugins: [ 'ImageResize', 'ImageUpload' ],
+
             ckfinder:
             {
                 uploadUrl: "{{ route('ckeditor.upload', ['_token' => csrf_token()]) }}"
             },
-            image: {
-                resizeOptions: [
-                    {
-                        name: 'resizeImage:50',
-                        label: '50%',
-                        value: '50'
-                    },
-                    {
-                        name: 'resizeImage:100',
-                        label: '100%',
-                        value: '100'
-                    },
-                    {
-                        name: 'resizeImage:200',
-                        label: '200%',
-                        value: '200'
-                    }
-                ],
-                toolbar: [
-                    'imageResize',
-                    '|',
-                    'imageStyle:alignLeft',
-                    'imageStyle:alignCenter',
-                    'imageStyle:alignRight'
-                ]
-            }
+
         })
         .catch( error => {
             console.error( error );

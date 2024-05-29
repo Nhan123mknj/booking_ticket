@@ -23,7 +23,7 @@
 <!--===============================================================================================-->
 </head>
 <body>
-
+    @include('sweetalert::alert')
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -31,56 +31,73 @@
 					<img src="source/login/images/img-01.png" alt="IMG">
 				</div>
 
-				<form action='{{ route('post-register') }}' method="POST" class="login100-form validate-form">
+				<form action="{{ route('post-register') }}" method="POST" class="login100-form validate-form">
                     @csrf
-					<span class="login100-form-title">
-						Đăng ký
-					</span>
+                    <span class="login100-form-title">
+                        Đăng ký
+                    </span>
 
-					<div class="wrap-input100 validate-input" data-validate = "Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email" placeholder="Email" required>
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="email" placeholder="Email" value="{{ old('email') }}" required>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-envelope" aria-hidden="true"></i>
                         </span>
-                        <span class="error-message" style="color: red; display: none;">Vui lòng nhập địa chỉ email hợp lệ.</span>
+                        @error('email')
+                            <span class="error-message" style="color: red;font-size: 12px;
+                            ">{{ $message }}</span>
+                        @enderror
                     </div>
 
-                    <div class="wrap-input100 validate-input" data-validate = "Valid name is required">
-                        <input class="input100" type="text" name="name" placeholder="Name" required>
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="name" placeholder="Name" value="{{ old('name') }}" required>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-user" aria-hidden="true"></i>
                         </span>
+
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate = "Valid name is required">
-                        <input class="input100" type="text" name="phone" placeholder="Số điện thoại" required>
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="text" name="phone" placeholder="Số điện thoại" value="{{ old('phone') }}" required>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-phone" aria-hidden="true"></i>
                         </span>
                     </div>
-                    <div class="wrap-input100 validate-input" data-validate = "Password is required">
+
+                    <div class="wrap-input100 validate-input">
                         <input class="input100" type="password" name="password" placeholder="Mật khẩu" required>
+                        <span class="focus-input100"></span>
+                        <span class="symbol-input100">
+                            <i class="fa fa-lock" aria-hidden="true"></i>
+                        </span>
+                        @error('password')
+                            <span class="error-message" style="color: red;font-size: 12px;
+                            ">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="wrap-input100 validate-input">
+                        <input class="input100" type="password" name="password_confirmation" placeholder="Xác nhận mật khẩu" required>
                         <span class="focus-input100"></span>
                         <span class="symbol-input100">
                             <i class="fa fa-lock" aria-hidden="true"></i>
                         </span>
                     </div>
 
-					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
-							Đăng ký
-						</button>
-					</div>
+                    <div class="container-login100-form-btn">
+                        <button class="login100-form-btn">
+                            Đăng ký
+                        </button>
+                    </div>
 
-					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
-							Đã có tài khoản
-							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
-						</a>
-					</div>
-				</form>
+                    <div class="text-center p-t-136">
+                        <a class="txt2" href="{{ route('dang-nhap') }}">
+                            Đã có tài khoản
+                            <i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+                        </a>
+                    </div>
+                </form>
 			</div>
 		</div>
 	</div>
@@ -106,5 +123,6 @@
 <!--===============================================================================================-->
 	<script src="source/login/js/main.js"></script>
 
+    {{-- @include('sweetalert::alert') --}}
 </body>
 </html>

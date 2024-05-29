@@ -22,7 +22,8 @@
                 <th>Thể loại</th>
                 <th>Trạng thái</th>
                 <th>Banner</th>
-                <th>Đạo diễn</th>
+
+                <th>Lịch chiếu</th>
                 <th>Chức năng</th>
               </tr>
             </thead>
@@ -48,7 +49,13 @@
                     <td><span class="badge bg-label-primary me-1">{{ $item->status }}</span></td>
                     <td><img style = "width: 100px;
                         height: auto;"src="{{ asset('source/website/images/' . $item->banner_url) }}" alt="movie_img" /></td>
-                    <td>{{ $item->director }}</td>
+                    {{-- <td>{{ $item->director }}</td> --}}
+                    <td>
+                        <a href="{{ route('showtime-admin',$item->id) }}" class="btn btn-primary" >
+                            Lịch chiếu
+                        </a>
+
+                    </td>
                     <td>
                       <div class="dropdown">
                         <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">

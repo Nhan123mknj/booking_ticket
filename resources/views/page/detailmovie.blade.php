@@ -53,87 +53,23 @@
         <div class="st_slider_rating_left">
             <div class="st_rating_box">
                 <fieldset class="rating">
-                <h3>3</h3>
-                    <input type="radio" name="rating" value="5" />
-                    <label class="full" title="5 stars"></label>
-                    <input type="radio" name="rating" value="4 and a half" />
-                    <label class="half" title="4.5 stars"></label>
-                    <input type="radio" name="rating" value="4" />
-                    <label class="full" title="4 stars"></label>
-                    <input type="radio" name="rating" value="3 and a half" />
-                    <label class="half" title="3.5 stars"></label>
-                    <input type="radio" name="rating" value="3" />
-                    <label class="full" title="3 stars"></label>
-                    <input type="radio" name="rating" value="2 and a half" />
-                    <label class="half" title="2.5 stars"></label>
-                    <input type="radio" name="rating" value="2" />
-                    <label class="full" title="2 stars"></label>
-                    <input type="radio" name="rating" value="1 and a half" />
-                    <label class="half" title="1.5 stars"></label>
-                    <input type="radio" name="rating" value="1" />
-                    <label class="full" title="1 star"></label>
-                    <input type="radio" name="rating" value="half" />
-                    <label class="half" title="0.5 stars"></label>
-                                            </fieldset>
-                <h4>CRITICS RATING</h4>
+                <h3>{{ $details->Star }}</h3>
+                @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <= $details->Star)
+                        <i class="fa fa-star"></i>
+                     @else
+                        <i class="fa fa-star-e"></i>
+                    @endif
+                @endfor
+                </fieldset>
+                <h4>SAO</h4>
             </div>
-            <div class="st_rating_box st_rating_box2">
-                <fieldset class="rating">
-                <h3>4.5&nbsp;&nbsp;</h3>
-                    <input type="radio" name="rating" value="5" />
-                    <label class="full" title="5 stars"></label>
-                    <input type="radio" name="rating" value="4 and a half" />
-                    <label class="half" title="4.5 stars"></label>
-                    <input type="radio" name="rating" value="4" />
-                    <label class="full" title="4 stars"></label>
-                    <input type="radio" name="rating" value="3 and a half" />
-                    <label class="half" title="3.5 stars"></label>
-                    <input type="radio" name="rating" value="3" />
-                    <label class="full" title="3 stars"></label>
-                    <input type="radio" name="rating" value="2 and a half" />
-                    <label class="half" title="2.5 stars"></label>
-                    <input type="radio" name="rating" value="2" />
-                    <label class="full" title="2 stars"></label>
-                    <input type="radio" name="rating" value="1 and a half" />
-                    <label class="half" title="1.5 stars"></label>
-                    <input type="radio" name="rating" value="1" />
-                    <label class="full" title="1 star"></label>
-                    <input type="radio" name="rating" value="half" />
-                    <label class="half" title="0.5 stars"></label>
-                                            </fieldset>
-                <h4>USERS RATING</h4>
-            </div>
-            <div class="st_rating_box st_rating_box2">
-                <fieldset class="rating">
-                <h3>0&nbsp;&nbsp;</h3>
-                    <input type="radio" name="rating" value="5" />
-                    <label class="full" title="5 stars"></label>
-                    <input type="radio" name="rating" value="4 and a half" />
-                    <label class="half" title="4.5 stars"></label>
-                    <input type="radio" name="rating" value="4" />
-                    <label class="full" title="4 stars"></label>
-                    <input type="radio" name="rating" value="3 and a half" />
-                    <label class="half" title="3.5 stars"></label>
-                    <input type="radio" name="rating" value="3" />
-                    <label class="full" title="3 stars"></label>
-                    <input type="radio" name="rating" value="2 and a half" />
-                    <label class="half" title="2.5 stars"></label>
-                    <input type="radio" name="rating" value="2" />
-                    <label class="full" title="2 stars"></label>
-                    <input type="radio" name="rating" value="1 and a half" />
-                    <label class="half" title="1.5 stars"></label>
-                    <input type="radio" name="rating" value="1" />
-                    <label class="full" title="1 star"></label>
-                    <input type="radio" name="rating" value="half" />
-                    <label class="half" title="0.5 stars"></label>
-                                            </fieldset>
-                <h4>RATE IT</h4>
-            </div>
+
         </div>
         <div class="st_slider_rating_right">
             <div class="st_slider_rating_btn prs_animate_btn1">
                 <ul>
-                    <li data-animation="animated fadeInUp"><a href="{{ route('showtimeByMovie',$details->slug) }}" class="button button--tamaya prs_upcom_main_btn" data-text="book now"><span>book now</span></a>
+                    <li data-animation="animated fadeInUp"><a href="{{ route('showtimeByMovie',$details->slug) }}" class="button button--tamaya prs_upcom_main_btn" data-text="Đặt ngay"><span>Đặt ngay</span></a>
                                     </li>
                 </ul>
             </div>

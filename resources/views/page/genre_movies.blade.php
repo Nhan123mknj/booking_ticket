@@ -19,32 +19,7 @@
 </div>
 <!-- prs title wrapper End -->
 <!-- prs mc slider wrapper Start -->
-<div class="prs_mc_slider_main_wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="prs_heading_section_wrapper">
-                    <h2>Comming soon</h2>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                <div class="prs_mc_slider_wrapper">
-                    <div class="owl-carousel owl-theme">
-                        <div class="item">
-                            <img src="source/website/images/content/movie_category/slider_img1.jpg" alt="about_img">
-                        </div>
-                        <div class="item">
-                            <img src="source/website/images/content/movie_category/slider_img2.jpg" alt="about_img">
-                        </div>
-                        <div class="item">
-                            <img src="source/website/images/content/movie_category/slider_img3.jpg" alt="about_img">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+@include('slide.slide')
 <!-- prs mc slider wrapper End -->
 <!-- prs mc category slidebar Start -->
 <div class="prs_mc_category_sidebar_main_wrapper">

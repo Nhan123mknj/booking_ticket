@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Genres;
 use App\Models\Menu;
+use App\Models\Slide;
 class AppServiceProvider extends ServiceProvider
 {
     /**
@@ -31,5 +32,11 @@ class AppServiceProvider extends ServiceProvider
 
             $view->with('menus', $menus);
         });
+        View::composer(['*'], function ($view) {
+            $slide = Slide::where('IsActive',1)->orderby('Order_slide')->get();
+            $view->with('slide', $slide);
+        });
+
+
     }
 }

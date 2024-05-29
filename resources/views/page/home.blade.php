@@ -155,10 +155,10 @@
                                                             @endforeach
                                                         </p>
                                                         @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $item->star)
-                                                                <i class="fa fa-star"></i> <!-- Full star -->
+                                                            @if ($i <= $item->Star)
+                                                                <i class="fa fa-star"></i>
                                                             @else
-                                                                <i class="fa fa-star-o"></i> <!-- Empty star -->
+                                                                <i class="fa fa-star-e"></i> <!-- Empty star -->
                                                             @endif
                                                         @endfor
                                                     </div>
@@ -210,11 +210,11 @@
                                                         <p>@foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}
                                                             @endforeach</p>
-                                                        @for ($i = 1; $i <= 5; $i++)
-                                                            @if ($i <= $item->star)
+                                                            @for ($i = 1; $i <= 5; $i++)
+                                                            @if ($i <= $item->Star)
                                                                 <i class="fa fa-star"></i>
                                                             @else
-                                                                <i class="fa fa-star-o"></i>
+                                                                <i class="fa fa-star-e"></i>
                                                             @endif
                                                         @endfor
                                                     </div>

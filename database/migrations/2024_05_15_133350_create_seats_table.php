@@ -9,21 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
-        Schema::create('seats', function (Blueprint $table) {
-            $table->increments('id');
-            $table->unsignedInteger('cinema_id')->nullable()->index('cinema_id');
-            $table->string('number', 10)->nullable();
-            $table->boolean('status')->default(false);
+        Schema::table('seats', function (Blueprint $table) {
+            // Thêm trường foreign key và thiết lập option onDelete('cascade')
+            $table->foreign('cinema_id')
+                  ->references('id')
+                  ->on('cinemas')
+                  ->onDelete('cascade');
         });
     }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
+    public function down()
     {
-        Schema::dropIfExists('seats');
+        Schema::table('seats', function (Blueprint $table) {
+            // Xóa foreign key khi rollback migration
+            $table->dropForeign(['cinema_id']);
+        });
     }
 };
