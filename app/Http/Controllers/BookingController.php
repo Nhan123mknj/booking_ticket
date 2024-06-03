@@ -101,8 +101,9 @@ class BookingController extends Controller
 {
     $showtime = Showtime::findOrFail($showtimeId);
     $selectedSeats = session('selectedSeats', []);
-    $userId = Auth::id();
-    $toEmail = 'buidanhnhan0693@gmail.com';
+
+    $toEmail = $request->input('email');
+    // dd($toEmail);
     $message = 'Hello';
     $subject = 'Welcome';
     $token = Str::random(32);
@@ -112,7 +113,7 @@ class BookingController extends Controller
         $booking=Booking::create([
             'showtime_id' => $showtimeId,
             'seat_id' => $seatId,
-            'user_id' => $userId,
+            'email'=> $toEmail,
             'qr_code_path' => $filename
         ]);
 
@@ -129,7 +130,7 @@ class BookingController extends Controller
 
     $showtime = Showtime::with(['bookings.user', 'bookings.showtime.movie'])->where('id', $showtimeId)->first();
 
-    $totalPrice = 0; // Initialize with base price or other initial value
+    $totalPrice = 0;
     foreach ($showtime->bookings as $booking) {
         if ($booking->seat) {
             $totalPrice += $booking->seat->price;
@@ -156,11 +157,12 @@ private function generateQRCode($token)
 
     public function vnpay_payment($showtimeId,Request $request){
         $data=$request->all();
+        $toEmail = $request->input('email');
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('book.success',['showtimeId'=>$showtimeId]);
+        $vnp_Returnurl = route('book.success', ['showtimeId' => $showtimeId, 'email' => $toEmail]);
         $vnp_TmnCode = "YTC79WFI";//Mã website tại VNPAY
         $vnp_HashSecret = "A3NLHBJ39UVXOT2C0LING8D5A3YIDY1U"; //Chuỗi bí mật
 

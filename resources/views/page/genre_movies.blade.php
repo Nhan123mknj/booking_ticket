@@ -10,7 +10,7 @@
                     <ul>
                         <li><a href="#">Home</a>
                         </li>
-                        <li>&nbsp;&nbsp; >&nbsp;&nbsp; Movie Category</li>
+                        <li>&nbsp;&nbsp; >&nbsp;&nbsp;Thể lọai phim</li>
                     </ul>
                 </div>
             </div>
@@ -19,7 +19,7 @@
 </div>
 <!-- prs title wrapper End -->
 <!-- prs mc slider wrapper Start -->
-@include('slide.slide')
+@include('page.slide.slide');
 <!-- prs mc slider wrapper End -->
 <!-- prs mc category slidebar Start -->
 <div class="prs_mc_category_sidebar_main_wrapper">
@@ -85,7 +85,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="prs_upcom_movie_content_box">
-                                                    <div class="prs_upcom_movie_content_box_inner"style="height: 112px">
+                                                    <div class="prs_upcom_movie_content_box_inner"style="height: 150px">
                                                         <h2><a href="{{ route('detailMovie',$item->slug) }}">{{ $item->title }}</a></h2>
                                                         <p>@foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}

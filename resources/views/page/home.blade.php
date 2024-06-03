@@ -26,20 +26,20 @@
                         </div>
                         <div class="st_video_slide_social_left float_left">
                             <ul>
-                                <li><a href="#"><i class="fa fa-facebook-f"></i></a>
+                                <li><a href="#"><i class="bx bxl-facebook"></i></a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                <li><a href="#"><i class="bx bxl-twitter"></i></a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                <li><a href="#"><i class="bx bxl-linkedin"></i></a>
                                 </li>
-                                <li><a href="#"><i class="fa fa-youtube"></i></a>
+                                <li><a href="#"><i class="bx bxl-youtube"></i></a>
                                 </li>
                             </ul>
                         </div>
                         <div class="st_video_slide_social_right float_left">
                             <ul>
                                 <li data-animation="animated fadeInUp" class=""><i class="far fa-calendar-alt"></i> {{ $bannerMovies->release_date }}</li>
-                                <li data-animation="animated fadeInUp" class=""><i class="far fa-clock"></i> {{ $bannerMovies->duration }} minutes</li>
+                                <li data-animation="animated fadeInUp" class=""><i class="far fa-clock"></i> {{ $bannerMovies->duration }} phút</li>
                             </ul>
                         </div>
                     </div>
@@ -69,13 +69,13 @@
                                 <div class="st_slider_list float_left">
                                     <ul>
                                         <li data-animation="animated fadeInUp"><i class="fa fa-calendar"></i> {{ $item->release_date }}</li>
-                                        <li data-animation="animated fadeInUp"><i class="fa fa-clock-o"></i> {{ $item->duration }}minutes</li>
+                                        <li data-animation="animated fadeInUp"><i class="fa fa-clock-o"></i> {{ $item->duration }} phút</li>
                                         <li data-animation="animated fadeInUp"><i class="fa fa-heart"></i> 50,133 votes</li>
                                     </ul>
                                 </div>
                                 <div class="prs_animate_btn1 prs_upcom_main_wrapper prs_third_slider_btn">
                                     <ul>
-                                        <li data-animation="animated fadeInUp"><a href="{{ route('showtimeByMovie',$item->slug) }}" class="button button--tamaya prs_upcom_main_btn" data-text="book now"><span>book now</span></a>
+                                        <li data-animation="animated fadeInUp"><a href="{{ route('showtimeByMovie',$item->slug) }}" class="button button--tamaya prs_upcom_main_btn" data-text="Đặt vé"><span>Đặt vé</span></a>
                                     </li>
                                     </ul>
                                 </div>
@@ -85,7 +85,7 @@
                         <div class="st_slider_right_cont_main_wrapper">
                             <div class="content">
                                 <div class="st_slider_img_wrapper float_left">
-                                    <img src="{{ $item->banner_doc }}" alt="img">
+                                    <img src="{{ asset('source/website/images/' . $item->banner_doc) }}" alt="img">
                                 </div>
                             </div>
                         </div>
@@ -148,7 +148,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="prs_upcom_movie_content_box">
-                                                    <div class="prs_upcom_movie_content_box_inner" style="height: 112px">
+                                                    <div class="prs_upcom_movie_content_box_inner" style="height: 150px">
                                                         <h2><a href="{{ route('detailMovie',$item->slug) }}">{{ $item->title }}</a></h2>
                                                         <p> @foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}
@@ -205,7 +205,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="prs_upcom_movie_content_box">
-                                                    <div class="prs_upcom_movie_content_box_inner"style="height: 112px">
+                                                    <div class="prs_upcom_movie_content_box_inner"style="height: 150px">
                                                         <h2><a href="#">{{ $item->title }}</a></h2>
                                                         <p>@foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}

@@ -112,11 +112,20 @@ Author: Webstrot
 										<li><a href="#"><i class="flaticon-tickets"></i> &nbsp;Box office Pickup </a>
 										</li>
 										<li>
-                                            <form action="{{ route('vnpay',['showtimeId'=> $showtime->id]) }}" method="POST">
-                                            @csrf
-                                            <input type='hidden' name="total" value="{{ $totalPrice }}">
-                                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
-                                        </form>
+                                            <form action="{{ route('vnpay', ['showtimeId' => $showtime->id]) }}" method="POST">
+                                                @csrf
+                                                <!-- Hidden input for total price -->
+                                                <input type='hidden' name="total" value="{{ $totalPrice }}">
+
+                                                <!-- Email input field -->
+                                                <div class="form-group">
+                                                    <label for="email">Email address</label>
+                                                    <input type="email" class="form-control" id="email" name="email" required>
+                                                </div>
+
+                                                <!-- Submit button -->
+                                                <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
+                                            </form>
 										</li>
                                         {{-- <li><form action="{{ route('book.Datve', $showtime->id) }}" method="POST">
                                             @csrf

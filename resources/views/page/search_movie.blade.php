@@ -85,7 +85,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="prs_upcom_movie_content_box">
-                                                    <div class="prs_upcom_movie_content_box_inner"style="height: 112px">
+                                                    <div class="prs_upcom_movie_content_box_inner"style="height: 150px">
                                                         <h2><a href="{{ route('detailMovie',$item->slug) }}">{{ $item->title }}</a></h2>
                                                         <p>@foreach($item->genres as $genre)
                                                             {{ $loop->first ? '' : ', ' }}{{ $genre->name }}

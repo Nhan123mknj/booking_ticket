@@ -22,11 +22,13 @@
 <div class="hs_blog_categories_main_wrapper">
     <div class="container">
         <div class="row">
-            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12">
+            <div class="col-lg-9 col-md-9 col-sm-12 col-xs-12" >
                 <div class="hs_blog_left_sidebar_main_wrapper">
                     <div class="row">
                         @foreach ($blogs as $item)
-                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"style="
+                        padding-bottom: 20px;
+                    ">
                             <div class="hs_blog_box1_main_wrapper">
                                 <div class="hs_blog_box1_img_wrapper">
 
@@ -56,7 +58,11 @@
                             </div>
                         </div>
                         @endforeach
-
+                        <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                            <div class="pager_wrapper gc_blog_pagination">
+                                {{ $blogs->links('vendor.pagination.custom') }}
+                            </div>
+                        </div>
 
                     </div>
                 </div>

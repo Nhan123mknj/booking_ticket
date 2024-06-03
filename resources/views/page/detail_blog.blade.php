@@ -34,7 +34,8 @@
                         <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                             <div class="hs_blog_box1_main_wrapper">
                                 <div class="hs_blog_box1_img_wrapper">
-                                    <img src="{{ $detail->images }}" alt="blog_img">
+                                    <img src="{{ asset('source/website/images/blog/' . $detail->images) }}" alt="blog_img">
+
                                 </div>
                                 <div class="hs_blog_box1_cont_main_wrapper">
                                     <div class="hs_blog_cont_heading_wrapper">
@@ -56,19 +57,18 @@
                                             </li>
                                             <li><i class="fa fa-comments"></i> &nbsp;&nbsp;<a href="#">{{ $detail->comments->count() }} Bình luận</a>
                                             </li>
-                                            <li><i class="fa fa-tags"></i> &nbsp;&nbsp;<a href="#">Presenter Movie</a>
-                                            </li>
+
                                         </ul>
                                     </div>
                                     <div class="hs_blog_box1_bottom_cont_right">
                                         <ul>
-                                            <li><a href="#"><i class="fa fa-facebook"></i></a>
+                                            <li><a href="#"><i class="bx bxl-facebook"></i></a>
                                             </li>
-                                            <li><a href="#"><i class="fa fa-youtube-play"></i></a>
+                                            <li><a href="#"><i class="bx bxl-youtube"></i></a>
                                             </li>
-                                            <li><a href="#"><i class="fa fa-linkedin"></i></a>
+                                            <li><a href="#"><i class="bx bxl-linkedin"></i></a>
                                             </li>
-                                            <li><a href="#"><i class="fa fa-twitter"></i></a>
+                                            <li><a href="#"><i class="bx bxl-twitter"></i></a>
                                             </li>
                                         </ul>
                                     </div>
@@ -148,10 +148,14 @@
                             @foreach ($recents as $item)
                             <div class="hs_blog_right_recnt_cont_wrapper">
                                 <div class="hs_footer_ln_img_wrapper">
-                                    <img src="{{ asset('source/website/images/' . $item->images) }}" alt="ln_img" />
+                                    <img src="{{ asset('source/website/images/blog/' . $item->images) }}" alt="ln_img" style="
+                                    width: 80px;
+                                    height: auto;
+                                "/>
                                 </div>
                                 <div class="hs_footer_ln_cont_wrapper">
-                                    <h4>{{ $item->title }}</h4>
+                                    <a href="{{ route('detailblog',$item->link) }}"><h4>{{ Str::limit($item->title, 20) }}</h4></a>
+
                                     <p>{{ $item->created_date }}</p>
                                 </div>
                             </div>

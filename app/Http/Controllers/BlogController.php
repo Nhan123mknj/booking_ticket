@@ -17,7 +17,7 @@ class BlogController extends Controller
      */
     public function blog()
     {
-        $blog = Blog::with('comments')->where('is_active', 1)->orderBy('post_order', 'desc')->get();
+        $blog = Blog::with('comments')->where('is_active', 1)->orderBy('post_order', 'desc')->paginate(3);
         $recent = Blog::where('is_active',1)->where('is_recent',1)->get();
         return view('page.blog', [
             'blogs'=>$blog,

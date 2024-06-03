@@ -70,7 +70,11 @@
             </div>
               <div class="mb-3">
                 <label class="form-label" for="basic-default">Sao</label>
-                <input type="number" class="form-control" id="basic-default" value="{{ $movie->Star }} name="Star"/>
+                <input type="number" class="form-control" id="basic-default" value="{{ $movie->Star }}" name="Star"/>
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="basic-default">Trailer</label>
+                <input type="text" class="form-control" id="basic-default" value="{{ $movie->trailer_url }}" name="trailer_url"/>
               </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-message">Chi tiết</label>

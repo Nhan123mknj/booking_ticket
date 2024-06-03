@@ -56,6 +56,10 @@
                 <label class="form-label" for="basic-default">Sao</label>
                 <input type="number" class="form-control" id="basic-default" placeholder="" name="Star"/>
               </div>
+              <div class="mb-3">
+                <label class="form-label" for="basic-default">Video trailer</label>
+                <input type="text" class="form-control" id="basic-default" placeholder="" name="trailer_url"/>
+              </div>
             <div class="mb-3">
               <label class="form-label" for="basic-default-message">Chi tiết</label>
               <textarea class="form-control" id="editor" name="description"></textarea>

@@ -135,10 +135,7 @@ private function getUpcoming(){
     return Movie::where('status','upcoming')->with('genres')->get();
 }
 
-public function getSlide(){
-    $slide = Slide::where('IsActive',1)->all();
-    return view('page.slide.slide',compact('slide'));
-}
+
 
 //trang admin-movie
 public function index()
@@ -176,6 +173,7 @@ public function store(Request $request)
     $movie->director = $request->input('director');
     $movie->description = $request->description;
     $movie->Star = $request->input('Star');
+    $movie->trailer_url = $request->input('trailer_url');
     $movie->status = $request->status;
     if($request->hasFile('banner_url')){
         $file =$request->file('banner_url');
@@ -228,7 +226,7 @@ public function update(Request $request, $id)
     $movie->director = $request->director;
     $movie->description = $request->input('description');
     $movie->status = $request->status;
-
+    $movie->trailer_url = $request->input('trailer_url');
 if ($request->hasFile('banner_url')) {
     $anhcu='source/website/images'.$movie->banner_url;
     if(File::exists($anhcu)){
