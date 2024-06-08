@@ -28,9 +28,12 @@
             <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12 hidden-sm hidden-xs">
                 <div class="prs_mcc_left_side_wrapper">
                     <div class="prs_mcc_left_searchbar_wrapper">
-                        <input type="text" placeholder="Search Movie">
-                        <button><i class="flaticon-tool"></i>
+                        <form action="{{ route('searchMovie') }}" method="get">
+
+                        <input type="text" placeholder="Tìm kiếm phim" name="keyword_submit">
+                        <button type="submit" name="search_movie"><i class="flaticon-tool"></i>
                         </button>
+                    </form>
                     </div>
                     <div class="prs_mcc_bro_title_wrapper">
                         <h2>Thể loại</h2>

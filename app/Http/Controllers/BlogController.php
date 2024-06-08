@@ -33,8 +33,10 @@ class BlogController extends Controller
 
         $detail=Blog::where('link',$slug)->first();
         $recent = Blog::where('is_active',1)->where('is_recent',1)->get();
-        $comment = Blog::with('comments')->where('link', $slug)->first();
-        // dd($comment);
+        $comment = Blog::with(['comments' => function ($query) {
+            $query->where('is_active', 1);
+        }])->where('link', $slug)->first();
+        // dd($comment->comments->count());
         return view('page.detail_blog', [
             'detail'=>$detail,
             'recents'=>$recent,
@@ -56,7 +58,7 @@ class BlogController extends Controller
 
         $comment = new Comment();
         $comment->name = $request->input('name');
-        $comment->phone = $request->input('phone');
+        // $comment->phone = $request->input('phone');
         $comment->detail = $request->input('detail');
         $comment->email = $request->input('email');
         $comment->blog_id = $blogId;
@@ -64,7 +66,7 @@ class BlogController extends Controller
 
         $comment->save();
 
-        return redirect()->back()->with('success', 'Comment success');
+        return redirect()->back()->with('success', 'Bình luận thành công');
     }
 
     /**
@@ -197,5 +199,46 @@ class BlogController extends Controller
 
             return response()->json(['fileName'=>$fileName,'uploaded'=>1,'url'=>$url]);
         }
+    }
+    public function search_admin_blog(Request $request)
+{
+    $keyword = $request->input('keyword_submit');
+    $blog_search = Blog::with('comments')->where('is_active', 1)->orderBy('post_order', 'desc')->where('title','like','%'.$keyword.'%')->paginate(5);
+    // dd($movie_search);
+
+    return view('admin.blog.blog_search', [
+        'blog'=>$blog_search,
+
+    ]);
+}
+    public function commentsByBlog($id){
+
+        $comments = Comment::with('blog')
+                       ->where('blog_id', $id)
+                       ->paginate(10);
+                    //    dd($comments);
+        return view('admin.blog.comment', [
+            'comments'=>$comments,
+
+        ]);
+    }
+    public function active_toggle_comment( $id)
+    {
+        $comment=Comment::where('comment_id',$id)->first();
+        if($comment->is_active){
+            $comment->is_active = 0;
+        }else{
+            $comment->is_active = 1;
+        }
+        $comment->update();
+        return back();
+    }
+
+    public function destroy_comment(string $id)
+    {
+        $comment=Comment::where('comment_id',$id)->first();
+
+        $comment->delete();
+        return redirect()->back()->with('success', 'Xóa thành công');
     }
 }

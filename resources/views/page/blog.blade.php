@@ -32,6 +32,7 @@
                             <div class="hs_blog_box1_main_wrapper">
                                 <div class="hs_blog_box1_img_wrapper">
 
+
                                     <img src="{{ asset('source/website/images/blog/' .$item->images) }}" alt="blog_img" /></td>
                                 </div>
                                 <div class="hs_blog_box1_cont_main_wrapper">
@@ -81,10 +82,13 @@
                         @foreach ($recents as $item)
                         <div class="hs_blog_right_recnt_cont_wrapper">
                             <div class="hs_footer_ln_img_wrapper">
-                                <img src="{{ asset('source/website/images/' . $item->images) }}" alt="ln_img" />
+                                <img src="{{ asset('source/website/images/blog/' . $item->images) }}" alt="ln_img" style="
+                                width: 80px;
+                                height: auto;
+                            "/>
                             </div>
                             <div class="hs_footer_ln_cont_wrapper">
-                                <h4>{{ $item->title }}</h4>
+                                <a href="{{ route('detailblog',$item->link) }}"><h4>{{ Str::limit($item->title, 20) }}</h4></a>
                                 <p>{{ $item->created_date }}</p>
                             </div>
                         </div>

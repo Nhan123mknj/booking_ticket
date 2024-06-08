@@ -10,7 +10,8 @@ class Comment extends Model
     use HasFactory;
     public $timestamps = false;
     protected $table = "comments";
-    protected $fillable = ['name', 'email', 'detail', 'created_date'];
+    protected $primaryKey = 'comment_id';
+    protected $fillable = ['comment_id','name', 'email', 'detail', 'created_date','is_active'];
     public function blog()
     {
         return $this->belongsTo(Blog::class, 'blog_id', 'id');

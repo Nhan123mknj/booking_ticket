@@ -41,7 +41,10 @@ Author: Webstrot
 	<link rel="stylesheet" type="text/css" href="source/website/css/style.css" />
 	<link rel="stylesheet" type="text/css" href="source/website/css/responsive.css" />
 	<link rel="stylesheet" id="theme-color" type="text/css" href="#"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
 	<!-- favicon links -->
+
 	<link rel="shortcut icon" type="/image/png" href="source/website/image/header/favicon.ico" />
 </head>
 
@@ -102,45 +105,38 @@ Author: Webstrot
 
 								</div>
 							</div>
+                            <div class="col-md-12" style="padding-top: 10px">
+								<div class="st_dtts_ineer_box float_left">
+									<h2 style="
+                                    font-size: 1.5rem;
+                                ">Nhập thông tin khách hàng</h2>
+                                    <form action= {{ route('vnpay', ['showtimeId' => $showtime->id]) }} method="POST">
+                                        @csrf
+                                        <input type='hidden' name="total" value="{{ $totalPrice }}">
+                                        <div class="form-group">
+                                            <label for="exampleInputName1">Tên người đặt</label>
+                                            <input type="name" name="name" class="form-control" id="exampleInputName1" placeholder="Tên người dùng">
+                                          </div>
+                                        <div class="form-group">
+                                          <label for="exampleInputEmail1">Email</label>
+                                          <input type="email" name="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+                                          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                                        </div>
 
-							<div class="col-md-12">
-								<div class="st_cherity_btn float_left">
-									<h3>CHỌN PHƯƠNG THỨC THANH TOÁN</h3>
-									<ul>
-										<li><a href="#"><i class="flaticon-tickets"></i> &nbsp;M-Ticket</a>
-										</li>
-										<li><a href="#"><i class="flaticon-tickets"></i> &nbsp;Box office Pickup </a>
-										</li>
-										<li>
-                                            <form action="{{ route('vnpay', ['showtimeId' => $showtime->id]) }}" method="POST">
-                                                @csrf
-                                                <!-- Hidden input for total price -->
-                                                <input type='hidden' name="total" value="{{ $totalPrice }}">
 
-                                                <!-- Email input field -->
-                                                <div class="form-group">
-                                                    <label for="email">Email address</label>
-                                                    <input type="email" class="form-control" id="email" name="email" required>
-                                                </div>
+                                        <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
+                                      </form>
 
-                                                <!-- Submit button -->
-                                                <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
-                                            </form>
-										</li>
-                                        {{-- <li><form action="{{ route('book.Datve', $showtime->id) }}" method="POST">
-                                            @csrf
-                                            <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
-                                        </form>
-										</li> --}}
-									</ul>
+
 								</div>
+
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 col-12">
 					<div class="row">
-						<div class="col-md-12">
+						<div class="col-md-12" style="padding: 20px">
 							<div class="st_dtts_bs_wrapper float_left">
 								<div class="st_dtts_bs_heading float_left">
 									<p>Đặt vé</p>
@@ -148,14 +144,14 @@ Author: Webstrot
 								<div class="st_dtts_sb_ul float_left">
 									<ul>
 										<li>{{ $seatDisplay }}
-											<br>({{ count($seatNumbers) }} Vé)  <span> {{number_format($Price) }} nghìn đồng</span>
+											<br>({{ count($seatNumbers) }} Vé)  <span> {{number_format($Price) }} đồng</span>
 										</li>
-										<li>Phí xử lí internet <span>100 đồng</span>
+										<li>Phí xử lí internet <span>10.000 đồng</span>
 										</li>
 									</ul>
-									<p>Phí đặt chỗ <span>50</span>
+									<p>Phí đặt chỗ <span>5.000 đồng</span>
 									</p>
-									<p>GST tích hợp (IGST) @ 18% <span>50</span>
+									<p>GST tích hợp (IGST) @ 18% <span>5.000 đồng</span>
 									</p>
 								</div>
 								<div class="st_dtts_sb_h2 float_left">
@@ -165,6 +161,7 @@ Author: Webstrot
 								</div>
 							</div>
 						</div>
+
 					</div>
 				</div>
 			</div>
@@ -197,6 +194,7 @@ Author: Webstrot
 	<script src="source/website/js/plugin/rs_slider/revolution.extension.slideanims.min.js"></script>
 	<script src="source/website/js/plugin/rs_slider/revolution.extension.video.min.js"></script>
 	<script src="source/website/js/custom.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.js"></script> --}}
 	<!--main js file end-->
 	<script>
 		//* Isotope js

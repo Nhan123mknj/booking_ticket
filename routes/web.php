@@ -14,7 +14,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\CKEditorController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\SlideController;
-
+use App\Http\Controllers\StatisticsController;
 
 // Page routes
     Route::controller(PageController::class)->group(function () {
@@ -91,6 +91,7 @@ Route::prefix('admin')->middleware('admin')->group(function(){
             Route::get('/edit/{id}', 'edit')->name('edit-movie-admin');
             Route::post('/update/{id}', 'update')->name('update-movie-admin');
             Route::get('/delete-movie/{id}', 'destroy')->name('delete-movie-admin');
+            Route::post('/search/movie_search', 'search_admin_movie')->name('searchMovie1');
         });
 
         // quan ly blog
@@ -104,6 +105,10 @@ Route::prefix('admin')->middleware('admin')->group(function(){
             Route::get('/edit-blog-a/{link}', 'edit')->name('edit-blog-admin');
             Route::post('/update/blog/{link}', 'update')->name('update-blog-admin');
             Route::post('/upload', 'upload')->name('ckeditor.upload');
+            Route::post('/search/blog_search', 'search_admin_blog')->name('search-blog');
+            Route::get('/comments/{id}', 'commentsByBlog')->name('comment.blog');
+            Route::get('/comment/active/{id}', 'active_toggle_comment')->name('toggle_comment.active');
+            Route::get('/delete-comment/{id}', 'destroy_comment')->name('delete-comment-admin');
         });
 
         // quan ly the loai
@@ -178,6 +183,8 @@ Route::prefix('admin')->middleware('admin')->group(function(){
             Route::get('/deleted/slide/{id}', 'destroy')->name('delete-slide-admin');
 
         });
+        Route::get('/statistics', [StatisticsController::class, 'index']);
+        Route::post('/statistics/bookings-by-date-range', [StatisticsController::class, 'bookingsByDateRange']);
         Route::post('ckeditor/upload', [CKEditorController::class, 'store'])->name('ckeditor.upload');
 
 });
@@ -188,6 +195,8 @@ Route::get('/fetch-movies',[
     'uses'=>'App\Http\Controllers\MovieController@fetchMovies'
 ]);
 
+Route::post('/send-verification-email', [BookingController::class, 'sendVerificationEmail']);
+Route::get('/verify-email/{token}', [BookingController::class, 'verifyEmail'])->name('verifyEmail');
 Route::post('/vnpay_payment/{showtimeId}', [BookingController::class, 'vnpay_payment'])->name('vnpay');
 
 

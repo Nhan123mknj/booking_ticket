@@ -14,7 +14,14 @@
 
       <!-- Basic Bootstrap Table -->
       <div class="card">
-        <h5 class="card-header">  </h5>
+        <h5 class="card-header"> <form action="{{ route('search-blog') }}" method="POST" class="search-bar">
+            @csrf
+            <div class="search">
+                <button type="submit" name="search_blog"><span class="search-icon material-symbols-outlined">search</span>
+                </button>
+                <input name="keyword_submit" type="search" class="search-input" placeholder="Type to Search...">
+              </div>
+          </form> </h5>
         <div class="table-responsive text-nowrap">
           <table class="table">
             <thead>
@@ -73,6 +80,9 @@
                           <div class="dropdown-menu">
                             <a class="dropdown-item" href="{{ route('show-detail-blog',$item->id) }}">
                                 <i class="bx bx-show"></i> Show
+                            </a>
+                            <a class="dropdown-item" href="{{ route('comment.blog',$item->id) }}">
+                                <i class="bx bx-show"></i> Show comment
                             </a>
                               <a class="dropdown-item" href="{{ route('edit-blog-admin',$item->link) }}">
                                   <i class="bx bx-edit-alt me-1"></i> Edit

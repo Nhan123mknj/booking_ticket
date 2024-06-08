@@ -273,6 +273,17 @@ public function search(Request $request)
         "genres"=>$cate
     ]);
 }
+public function search_admin_movie(Request $request)
+{
+    $keyword = $request->input('keyword_submit1');
+    $movie_search = Movie::with('genres')->where('title','like','%'.$keyword.'%')->paginate(5);
+    // dd($movie_search);
+
+    return view('admin.movie.search-movie', [
+        'movies'=>$movie_search,
+
+    ]);
+}
 }
 
 

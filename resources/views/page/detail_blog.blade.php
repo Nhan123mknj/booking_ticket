@@ -55,7 +55,7 @@
                                         <ul>
                                             <li><i class="fa fa-thumbs-up"></i> &nbsp;&nbsp;<a href="#">1244 Likes</a>
                                             </li>
-                                            <li><i class="fa fa-comments"></i> &nbsp;&nbsp;<a href="#">{{ $detail->comments->count() }} Bình luận</a>
+                                            <li><i class="fa fa-comments"></i> &nbsp;&nbsp;<a href="#">{{ $comments->comments->count() }} Bình luận</a>
                                             </li>
 
                                         </ul>

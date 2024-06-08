@@ -13,7 +13,7 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
     />
-
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Dashboard - Analytics | Sneat - Bootstrap 5 HTML Admin Template - Pro</title>
     <base href="{{asset('')}}">
     <meta name="description" content="" />
@@ -28,7 +28,7 @@
       href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
     <!-- Icons. Uncomment required icon fonts -->
     <link rel="stylesheet" href="source/admin/assets/vendor/fonts/boxicons.css" />
 
@@ -43,6 +43,8 @@
     <link rel="stylesheet" href="source/admin/assets/vendor/libs/apex-charts/apex-charts.css" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.3.0/flowbite.min.css" rel="stylesheet" />
     <!-- Page CSS -->
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css'>
+    <link rel="stylesheet" href="source/admin/assets/search.css">
 
     <!-- Helpers -->
     <script src="source/admin/assets/vendor/js/helpers.js"></script>
@@ -52,6 +54,8 @@
     <script src="source/admin/assets/js/config.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css" integrity="sha512-vKMx8UnXk60zUwyUnUPM3HbQo8QfmNx7+ltw8Pm5zLusl1XIfwcxo8DbWCqMGKaWeNxWA8yrx5v3SaVpMvR3CA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     @livewireStyles
     <style>
         .avatar{
@@ -377,9 +381,66 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" integrity="sha512-VEd+nq25CkR676O+pLBnDW09R7VQX9Mdiij052gVCp5yVH3jGtH70Ho/UUv4mJDsEdTvqRCFZg0NKGiojGnUCw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     @yield('custom-js');
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        var ctx = document.getElementById('bookingsByDateRangeChart').getContext('2d');
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: [],
+                datasets: [{
+                    label: 'Số lượng vé đặt',
+                    data: [],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
 
+        // Submit form và gửi yêu cầu Ajax để lấy dữ liệu thống kê
+        document.getElementById('dateRangeForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            var startDate = document.getElementById('startDate').value;
+            var endDate = document.getElementById('endDate').value;
+
+            fetch('admin/statistics/bookings-by-date-range', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+                    },
+                    body: JSON.stringify({
+                        start_date: startDate,
+                        end_date: endDate
+                    })
+                })
+                .then(response => response.json())
+                .then(data => {
+                    myChart.data.labels = data.map(item => item.date);
+                    myChart.data.datasets[0].data = data.map(item => item.count);
+                    myChart.update();
+                });
+        });
+    </script>
+@if (Session::has('success'))
+
+<script>
+    toastr.success("{{ Session::get('success') }}")
+</script>
+@endif
   </body>
 
 </html>

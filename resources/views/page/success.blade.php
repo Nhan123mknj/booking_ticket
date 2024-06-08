@@ -37,40 +37,42 @@
                             <div class="st_bcc_tecket_bottom_left_wrapper">
                                 <div class="st_bcc_tecket_bottom_inner_left">
                                     <div class="st_bcc_teckt_bot_inner_img">
-                                        <img style="width: 85px;height:127px" src="{{ asset('source/website/images/' . $showtime->movie->banner_url) }}" alt="img">
+                                        <img style="width: 85px;height:127px" src="{{ asset('source/website/images/' . $bookings->first()->showtime->movie->banner_url) }}" alt="img">
                                     </div>
 
                                     <div class="st_bcc_teckt_bot_inner_img_cont">
 
 
-                                        {{-- @foreach ($showtime->bookings as $booking) --}}
-                                        {{-- <h4>{{ $showtime->bookings->first()->user->name }}</h4> --}}
-                                        {{-- @endforeach --}}
-                                        <h3>{{ $showtime->Date_show }} | {{ $showtime->Time_show }}</h3>
-                                        <h6>{{ $showtime->movie->title}}</h6>
+                                        <h3>{{ $bookings->first()->showtime->Date_show }} | {{ $bookings->first()->showtime->Time_show }}</h3>
+                                        <h6>{{ $bookings->first()->showtime->movie->title }}</h6>
                                     </div>
                                     <div class="st_purchase_img">
                                         <img src="source/website/images/content/pur2.png" alt="img">
                                     </div>
                                 </div>
+                                @php
+                                            $seatNumbers = $seats->pluck('number')->all();
+                                            $seatDisplay = implode(', ', $seatNumbers);
+                                @endphp
                                 <div class="st_bcc_tecket_bottom_inner_right">	<i class="fas fa-chair"></i>
-                                    <h3>2 TICKETS <br>
-                                    <span>EXECUTIV - K1, K2</span></h3>
+                                    <h3>({{ count($seatNumbers) }} Vé) <br>
+
+                                    <span> Ghế {{ $seatDisplay }}</span></h3>
                                 </div>
                             </div>
                             <div class="st_bcc_tecket_bottom_right_wrapper">
-                                <img src="source/website/images/content/qr.png" alt="img">
+                                <img src="{{ asset('qrcodes/' . $bookings->first()->qr_code_path) }}" alt="img">
                                 <h4>Booking ID<br>SSST0000310644</h4>
                             </div>
                             <div class="st_bcc_tecket_bottom_left_price_wrapper">
-                                <h4>Total Amount</h4>
-                                <h5>₹373.00</h5>
+                                <h4>Tổng tiền</h4>
+                                <h5>{{ number_format($totalPrice) }} VND</h5>
                             </div>
                         </div>
                     </div>
                     <div class="st_bcc_ticket_boxes_bottom_wrapper float_left">
-                        <p>You can access your ticket from your Profile. We will send you
-                            <br>an e-Mail/SMS Confirmation with in 15 Minutes.</p>
+                        <p>Bạn có thể check Email của bạn.
+                            <br>Chúng tôi đã gửi mã QRCODE vào email của bạn.</p>
                         <ul>
                             <li><a href="#">INVITE FRIENDS</a>
                             </li>
@@ -98,32 +100,32 @@
                     <div class="owl-carousel owl-theme">
                         <div class="item">
                             <div class="prs_pn_img_wrapper">
-                                <img src="images/content/p1.jpg" alt="patner_img">
+                                <img src="source/website/images/content/p1.jpg" alt="patner_img">
                             </div>
                         </div>
                         <div class="item">
                             <div class="prs_pn_img_wrapper">
-                                <img src="images/content/p2.jpg" alt="patner_img">
+                                <img src="source/website/images/content/p2.jpg" alt="patner_img">
                             </div>
                         </div>
                         <div class="item">
                             <div class="prs_pn_img_wrapper">
-                                <img src="images/content/p3.jpg" alt="patner_img">
+                                <img src="source/website/images/content/p3.jpg" alt="patner_img">
                             </div>
                         </div>
                         <div class="item">
                             <div class="prs_pn_img_wrapper">
-                                <img src="images/content/p4.jpg" alt="patner_img">
+                                <img src="source/website/images/content/p4.jpg" alt="patner_img">
                             </div>
                         </div>
                         <div class="item">
                             <div class="prs_pn_img_wrapper">
-                                <img src="images/content/p5.jpg" alt="patner_img">
+                                <img src="source/website/images/content/p5.jpg" alt="patner_img">
                             </div>
                         </div>
                         <div class="item">
                             <div class="prs_pn_img_wrapper">
-                                <img src="images/content/p6.jpg" alt="patner_img">
+                                <img src="source/website/images/content/p6.jpg" alt="patner_img">
                             </div>
                         </div>
                     </div>

@@ -90,7 +90,7 @@ class BookingController extends Controller
 
         $showtime = Showtime::with(['theater', 'movie'])->findOrFail($showtimeId);
         $Price = $seats->sum('price');
-        $totalPrice=$Price+100;
+        $totalPrice=$Price+10000;
 
         return view('page.confirm', compact('showtime', 'seats','totalPrice','Price'));
     }
@@ -101,8 +101,9 @@ class BookingController extends Controller
 {
     $showtime = Showtime::findOrFail($showtimeId);
     $selectedSeats = session('selectedSeats', []);
-
+    // $seats = Seat::whereIn('id', $selectedSeats)->get();
     $toEmail = $request->input('email');
+    $toUser = $request->input('name');
     // dd($toEmail);
     $message = 'Hello';
     $subject = 'Welcome';
@@ -114,10 +115,9 @@ class BookingController extends Controller
             'showtime_id' => $showtimeId,
             'seat_id' => $seatId,
             'email'=> $toEmail,
-            'qr_code_path' => $filename
+            'qr_code_path' => $filename,
+            'user_name'=>$toUser,
         ]);
-
-        // Lưu đường dẫn mã QR vào bảng dữ liệu booking (nếu cần)
 
         $booking->save();
         Seat::where('id', $seatId)->update(['status' => 1]);
@@ -128,16 +128,18 @@ class BookingController extends Controller
 
     $request->session()->forget('selectedSeats');
 
-    $showtime = Showtime::with(['bookings.user', 'bookings.showtime.movie'])->where('id', $showtimeId)->first();
-
-    $totalPrice = 0;
-    foreach ($showtime->bookings as $booking) {
+    $bookings = Booking::with(['showtime.movie', 'seat'])
+    ->where('showtime_id', $showtimeId)
+    ->get();
+    $seats = $bookings->pluck('seat');
+    $totalPrice = 10000;
+    foreach ($bookings as $booking) {
         if ($booking->seat) {
             $totalPrice += $booking->seat->price;
         }
     }
 
-    return view('page.success', compact('showtime', 'totalPrice'));
+    return view('page.success', compact('bookings', 'totalPrice','seats'));
 }
 
 private function generateQRCode($token)
@@ -158,11 +160,12 @@ private function generateQRCode($token)
     public function vnpay_payment($showtimeId,Request $request){
         $data=$request->all();
         $toEmail = $request->input('email');
+        $toUser = $request->input('name');
         error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
         date_default_timezone_set('Asia/Ho_Chi_Minh');
 
         $vnp_Url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = route('book.success', ['showtimeId' => $showtimeId, 'email' => $toEmail]);
+        $vnp_Returnurl = route('book.success', ['showtimeId' => $showtimeId, 'email' => $toEmail,'name'=>$toUser]);
         $vnp_TmnCode = "YTC79WFI";//Mã website tại VNPAY
         $vnp_HashSecret = "A3NLHBJ39UVXOT2C0LING8D5A3YIDY1U"; //Chuỗi bí mật
 

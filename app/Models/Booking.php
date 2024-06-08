@@ -11,18 +11,17 @@ class Booking extends Model
     protected $table = "bookings";
     public $timestamps = false;
     protected $fillable = [
-        'user_id',
+
         'showtime_id',
         'seat_id',
         'status',
         'booking_time',
-        'qr_code_path'
+        'qr_code_path',
+        'email',
+        'user_name'
 
     ];
-    public function user()
-    {
-        return $this->belongsTo(User::class);
-    }
+
 
     public function showtime()
     {
